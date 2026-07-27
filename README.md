@@ -89,9 +89,3 @@ Invalid input is rejected before any database query is executed.
 
 The original search functionality was vulnerable because it directly inserted user input into an SQL query, allowing SQL Injection attacks. By entering a payload such as `' OR 1=1 --`, an attacker could manipulate the SQL statement and retrieve all records from the database. The vulnerability was resolved by replacing the raw SQL query with the Django ORM, which safely parameterizes user input and prevents it from being interpreted as executable SQL. Frontend validation improves usability by preventing common input mistakes, but it can be bypassed, making backend validation essential for protecting the application.
 
----
-
-## Author
-
-Mercy Pimer
-Refactory Academy – Application Security
