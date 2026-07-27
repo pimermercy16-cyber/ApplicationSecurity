@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Parts Inventory</title>
+</head>
+<body>
+
+    <h1>Vehicle Parts Inventory</h1>
+
+    <!-- Search Form -->
+    <form method="GET">
+
+        <input
+            type="text"
+            name="q"
+            value="{% if form %}{{ form.q.value|default:'' }}{% endif %}"
+            placeholder="Search for a part..."
+            required
+            maxlength="50"
+            pattern="[A-Za-z0-9 ]+"
+            title="Only letters, numbers and spaces are allowed."
+        >
+
+        <button type="submit">Search</button>
+
+        {% if form.q.errors %}
+            <div style="color:red; margin-top:10px;">
+                {% for error in form.q.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+    </form>
+
+    <br>
+
+    <!-- Results Table -->
+    <table border="1" cellpadding="8" cellspacing="0">
+
+        <tr>
+            <th>Name</th>
+            <th>Price (UGX)</th>
+        </tr>
+
+        {% for part in parts %}
+        <tr>
+            <td>{{ part.name }}</td>
+            <td>{{ part.price }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="2">No parts found.</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>
